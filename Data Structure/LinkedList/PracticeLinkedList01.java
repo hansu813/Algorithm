@@ -1,6 +1,6 @@
 package data_structure;
 
-class LikedList2 extends LikedList {
+class LikedList2 extends LinkedList {
 	LikedList2(Node node) {
 		this.head = node;
 	}

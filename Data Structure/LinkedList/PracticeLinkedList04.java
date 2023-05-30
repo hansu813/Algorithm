@@ -1,21 +1,29 @@
 package data_structure;
+/**
+ * 단방향 리스트에서 중복 데이터를 찾아 삭제하시오.
+ * 
+ * 입력 연결 리스트 : 1, 3, 3, 1, 4, 2, 4, 2
+ * 결과 연결 리스트 : 1, 3, 4, 2
+ * @author 김한수
+ *
+ */
 
-class Node {
-	int data;
-	Node next;
-	
-	Node() {}
-	Node(int data, Node next) {
-		this.data = data;
-		this.next = next;
-	}
-}
+//class Node {
+//	int data;
+//	Node next;
+//	
+//	Node() {}
+//	Node(int data, Node next) {
+//		this.data = data;
+//		this.next = next;
+//	}
+//}
 
-class LikedList {
+class LinkedList {
 	Node head;
 	
-	LikedList() {};
-	LikedList(Node node) {
+	LinkedList() {};
+	LinkedList(Node node) {
 		this.head = node;
 	}
 	
@@ -63,21 +71,19 @@ class LikedList {
 	}
 	
 //	연결 리스트에서 데이터 찾기
-	public void findData(int data) {
-		if(this.isEmpty()) {
-			System.out.println("list is empty");
-			return;
-		}
+	public boolean findData(int data) {
+//		if(this.isEmpty()) {
+//			System.out.println("list is empty");
+//		}
 		
 		Node cur = this.head;
 		while(cur != null) {
 			if(cur.data == data) {
-				System.out.println("data exist!");
-				return;
+				return true;
 			}
 			cur = cur.next;
 		}
-		System.out.println("data not found");
+		return false;
 	}
 	
 //	연결 리스트의 모든 데이터 출력
@@ -96,31 +102,36 @@ class LikedList {
 	}
 }
 
-public class LinkedListExample {
+public class PracticeLinkedList04 {
 
+	public static LinkedList removeDup(LinkedList listBefore) {
+		LinkedList listAfter = new LinkedList();
+		
+		Node cur = listBefore.head;
+		while(cur != null) {
+			if(listAfter.findData(cur.data) == false) {
+				listAfter.addData(cur.data);
+			}
+			cur = cur.next;
+		}
+		return listAfter;
+	}
+	
 	public static void main(String[] args) {
-//		Test Code
-		LinkedList myList = new LinkedList(new Node(1, null));
-		myList.showData();
+//		Test code
+		LinkedList linkedList = new LinkedList();
+		linkedList.addData(1);
+		linkedList.addData(3);
+		linkedList.addData(3);
+		linkedList.addData(1);
+		linkedList.addData(4);
+		linkedList.addData(2);
+		linkedList.addData(4);
+		linkedList.addData(2);
+		linkedList.showData();
 		
-		myList.addData(2);
-		myList.addData(3);
-		myList.addData(4);
-		myList.addData(5);
-		myList.showData();
-
-		myList.findData(3);
-		myList.findData(100);
-		
-		myList.removeData();
-		myList.removeData();
-		myList.removeData();
-		myList.showData();
-		
-		myList.removeData();
-		myList.removeData();
-		myList.removeData();
-		
+		linkedList = removeDup(linkedList);
+		linkedList.showData();
 	}
 
 }
